@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { build } from "vite";
 
 export const api = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }),
@@ -13,7 +12,14 @@ export const api = createApi({
                 body: payload,
             }),
         }),
+        postAiCode: build.mutation({
+            query: (payload) => ({
+                url: "openai/code",
+                method: "POST",
+                body: payload,
+            }),
+        }),
     }),
 });
 
-export const { usePostAiTextMutation } = api;
+export const { usePostAiTextMutation, usePostAiCodeMutation } = api;
